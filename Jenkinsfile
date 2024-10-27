@@ -20,6 +20,7 @@ pipeline {
         stage('Run') {
             steps {
                 echo "Deploing ..."
+                sh 'if [[docker ps | grep jcalc -eq \'jcalc\']]; then docker stop jcalc && docker rm jcalc fi'
                 sh 'docker run -d --name jcalc -p 80:80 jcalc:0.$BUILD_NUMBER'                                
             }
         }
